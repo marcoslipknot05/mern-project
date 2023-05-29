@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+  }
+
+  header {
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo-landing {
+ width: 300px;
+ height: auto;
+ margin-top:30px;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 2rem 1rem 1rem 1rem;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(46, 47, 51);
+  }
+
+  .start-browser {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .browser_text {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(46, 47, 51);
+    font-size: 1.2rem;
+  }
+
+  .browser-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .menu_container {
+    text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(46, 47, 51);
+    font-size: 0.8rem;
+    margin: 1rem;
+  }
+  
+  .acces_menu {
+    list-style: none;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  footer {
+    text-align: center;
+  }
+
+  .start_browser {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .browser_text {
+    font-family: "Kalam", cursive;
+    color: rgb(46, 47, 51);
+    font-size: 1.2rem;
+  }
