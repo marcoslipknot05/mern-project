@@ -1,3 +1,4 @@
+app.use('/cities', require('./routes/cities'))
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
