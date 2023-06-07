@@ -3,6 +3,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const db = require('./keys').mongoURI;
+
+mongoose.connect(db, { useNewUrlParser: true })
+  .then(() => {
+    console.log('Connection to MongoDB established');
+    // Aquí puedes seguir configurando tu servidor y rutas
+  })
+  .catch(err => console.log(err));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
