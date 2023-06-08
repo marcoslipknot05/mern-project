@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const City = require('../model/cityModel');
+const cityModel = require('../model/cityModel');
+
+router.get('/test', (req, res) => {
+  res.send({mesage:'OK'})
+});
 
 router.get('/all', (req, res) => {
-  City.find({})
+  cityModel.find()
     .then(cities => {
       console.log(cities);
       res.send(cities);
@@ -14,8 +18,8 @@ router.get('/all', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
-  City.findById(req.params.id)
+router.get('/city/:id', (req, res) => {
+  cityModel.findById(req.params.id)
     .then(city => {
       if (!city) {
         return res.status(404).send('City not found');
