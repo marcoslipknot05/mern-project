@@ -1,7 +1,9 @@
-import React from 'react';
-import appLogo from "../images/MYtineraryLogo.png"
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchCities } from '../store/actions/cityActions';
+import appLogo from "../images/MYtineraryLogo.png";
 import "../utilities/landing.css";
-import imageLanding from "../images/start-landing-image.png";
+import startImage from "../images/start-landing-image.png"; // Cambia el nombre de la imagen aquí
 import { Link } from "react-router-dom";
 import homeImage from "../images/Home_logo.png";
 
@@ -10,7 +12,11 @@ const userMenu = [
   { name: 'Create Account', link: '/CreateAccount' },
 ];
 
-const Landing = () => {
+const Landing = ({ fetchCities }) => {
+  useEffect(() => {
+    fetchCities();
+  }, [fetchCities]);
+
   return (
     <div>
       <header>
@@ -24,12 +30,14 @@ const Landing = () => {
         </h1>
         <div className="start_browser">
           <p className="browser_text">Start browsing</p>
-          <img
-            className="browser_image"
-            src={imageLanding}
-            alt={imageLanding}
-            style={{ width: "200px", height: "200px" }}
-          />
+          <Link to="/cities"> {/* Agrega el enlace aquí */}
+            <img
+              className="browser_image"
+              src={startImage} // Cambia el nombre de la imagen aquí
+              alt="Start"
+              style={{ width: "200px", height: "200px" }}
+            />
+          </Link>
         </div>
         <div className="menu_container">
           <h2>Want to build your own MYtinerary?</h2>
@@ -53,4 +61,8 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+const mapDispatchToProps = {
+  fetchCities
+};
+
+export default connect(null, mapDispatchToProps)(Landing);
