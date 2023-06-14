@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchCities } from '../store/actions/cityActions';
+import CityList from './citylist';
 import appLogo from "../images/MYtineraryLogo.png";
 import "../utilities/landing.css";
-import startImage from "../images/start-landing-image.png"; // Cambia el nombre de la imagen aquí
+import startImage from "../images/start-landing-image.png";
 import { Link } from "react-router-dom";
 import homeImage from "../images/Home_logo.png";
 
@@ -13,9 +14,15 @@ const userMenu = [
 ];
 
 const Landing = ({ fetchCities }) => {
+  const [showCityList, setShowCityList] = useState(false);
+
   useEffect(() => {
     fetchCities();
   }, [fetchCities]);
+
+  const handleStartImageClick = () => {
+    setShowCityList(true);
+  };
 
   return (
     <div>
@@ -30,12 +37,13 @@ const Landing = ({ fetchCities }) => {
         </h1>
         <div className="start_browser">
           <p className="browser_text">Start browsing</p>
-          <Link to="/cities"> {/* Agrega el enlace aquí */}
+          <Link to="/cities">
             <img
               className="browser_image"
-              src={startImage} // Cambia el nombre de la imagen aquí
+              src={startImage}
               alt="Start"
               style={{ width: "200px", height: "200px" }}
+              onClick={handleStartImageClick}
             />
           </Link>
         </div>
@@ -49,6 +57,7 @@ const Landing = ({ fetchCities }) => {
             ))}
           </div>
         </div>
+        {showCityList && <CityList />}
       </main>
       <footer>
         <img
