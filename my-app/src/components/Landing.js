@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchCities } from '../store/actions/cityActions';
 import CityList from './citylist';
-import appLogo from "../images/MYtineraryLogo.png";
 import "../utilities/landing.css";
 import startImage from "../images/start-landing-image.png";
 import { Link } from "react-router-dom";
-import homeImage from "../images/Home_logo.png";
 
-const userMenu = [
+export const userMenu = [
   { name: 'Log in', link: '/LogIn' },
   { name: 'Create Account', link: '/CreateAccount' },
 ];
@@ -26,11 +24,6 @@ const Landing = ({ fetchCities }) => {
 
   return (
     <div>
-      <header>
-        <div>
-          <img src={appLogo} alt="Descripción de la imagen" className="logo-landing" />
-        </div>
-      </header>
       <main>
         <h1 className="title">
           Find your perfect trip, designed by insiders who know and love their cities.
@@ -59,13 +52,14 @@ const Landing = ({ fetchCities }) => {
         </div>
         {showCityList && <CityList />}
       </main>
+      {/* Comentario: Footer comentado
       <footer>
         <img
           src={homeImage}
           alt={homeImage}
           style={{ width: "50px", height: "50px" }}
         />
-      </footer>
+      </footer> */}
     </div>
   );
 };

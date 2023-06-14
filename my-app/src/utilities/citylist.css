@@ -1,0 +1,7 @@
+* {
+    box-sizing: border-box;
+  }
+
+  .city-list-container {
+    margin-top: 0px; /* Ajusta el valor según sea necesario */
+  }
