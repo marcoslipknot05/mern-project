@@ -28,16 +28,18 @@ class CityList extends React.Component {
     // Renderiza la lista de ciudades
     return (
       <div className="city-list-container">
-        <header>
-          <div>
-            <img src={appLogo} alt="Descripción de la imagen" className="logo-landing" />
-          </div>
-        </header>
-        <ul>
-          {cities.map(city => (
-            <li key={city.id}>{city.name}</li>
-          ))}
-        </ul>
+      <header>
+        <div>
+          <img src={appLogo} alt="Descripción de la imagen" className="logo-landing" />
+        </div>
+      </header>
+      <ul>
+        {cities.map(city => (
+          <li key={city.id}>
+            <Link to={`/cities/${city.name}/itineraries`}>{city.name}</Link> {/* Agregar el enlace */}
+          </li>
+        ))}
+      </ul>
         <ul className="acces_menu">
           {userMenu.map((menuItem, index) => (
             <li key={index}>

@@ -4,19 +4,26 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const db = require('./keys').mongoURI;
+const db2 = require('./keys').mongoURI2;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use('/cities', require('./routes/cities'));
+const citiesRouter = require('./routes/cities');
+const itinerariesRouter = require('./routes/itineraries');
 
-app.listen(3002, () => {
-  console.log('Servidor en ejecución en el puerto 3002');
+app.use('/cities', citiesRouter);
+app.use('/itineraries', itinerariesRouter);
+
+const port = 3002;
+app.listen(port, () => {
+  console.log(`Servidor en ejecución en el puerto ${port}`);
 });
 
-mongoose.connect(db, { useNewUrlParser: true })
+mongoose
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log('Connection to MongoDB established');
+    console.log('Conexión exitosa a MongoDB');
   })
   .catch(err => console.log(err));
