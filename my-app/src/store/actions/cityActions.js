@@ -6,9 +6,10 @@ export const FETCH_CITIES_FAILURE = 'FETCH_CITIES_FAILURE';
 
 // Action Creators
 export const fetchCitiesSuccess = (cities) => {
+  const cityNames = cities.map(city => city.name);
   return {
     type: FETCH_CITIES_SUCCESS,
-    payload: cities
+    payload: cityNames
   };
 };
 
