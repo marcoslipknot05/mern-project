@@ -1,4 +1,4 @@
-import { FETCH_ITINERARIES_SUCCESS, FETCH_ITINERARIES_FAILURE } from '../actions/itineraryActions';
+import { FETCH_ITINERARIES_SUCCESS, FETCH_ITINERARIES_FAILURE } from '../actions/cityActions';
 
 // Estado inicial del reductor
 const initialState = {

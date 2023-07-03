@@ -1,75 +1,63 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import appLogo from "../images/MYtineraryLogo.png";
+import { Link, useNavigate } from 'react-router-dom';
+import homeImage from '../images/Home_logo.png';
 import { fetchCities } from '../store/actions/cityActions';
-import { userMenu } from "./Landing";
-import { Link } from "react-router-dom";
-import homeImage from "../images/Home_logo.png";
-import ItineraryList from './itineraryList';
 
-class CityList extends React.Component {
-  componentDidMount() {
-    this.props.fetchCities();
+const CityList = ({ cities, error, fetchCities }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchCities();
+  }, [fetchCities]);
+
+  if (error) {
+    return <div>Error al cargar las ciudades: {error.message}</div>;
   }
 
-  render() {
-    const { cities, error } = this.props;
+  if (cities.length === 0) {
+    return <div>Cargando ciudades...</div>;
+  }
 
-    if (error) {
-      return <div>Error al cargar las ciudades: {error.message}</div>;
-    }
+  const handleCityClick = (cityName) => {
+    const itineraryPath = `/itineraries/${cityName}/itineraries`;
+    navigate(itineraryPath);
+  };
 
-    if (cities.length === 0) {
-      return <div>Cargando ciudades...</div>;
-    }
-
-    return (
-      <div className="city-list-container">
-        <header>
-          <div>
-            <img src={appLogo} alt="Descripción de la imagen" className="logo-landing" />
-          </div>
-        </header>
-        <ul>
-          {cities.map((city, index) => (
-            <li key={`city-${index}`}>
-              <Link to={`/cities/${city.name}/itineraries`}>{city.name}</Link>
-            </li>
-          ))}
-        </ul>
-        <ul className="acces_menu">
-          {userMenu.map((menuItem, index) => (
-            <li key={`menu-${index}`}>
-              <Link to={menuItem.link}>{menuItem.name}</Link>
-            </li>
-          ))}
-        </ul>
-        <footer>
-          <Link to="/">
-            <img
-              src={homeImage}
-              alt={homeImage}
-              style={{ width: "50px", height: "50px" }}
-            />
-          </Link>
-        </footer>
-
-        {/* Agrega el componente ItineraryList */}
+  return (
+    <div className="city-list-container">
+      <header></header>
+      <ul>
         {cities.map((city, index) => (
-          <ItineraryList key={`itinerary-${index}`} cityId={city.id} />
+          <li key={`city-${index}`} onClick={() => handleCityClick(city.name)}>
+            {city.name}
+          </li>
         ))}
-      </div>
-    );
-  }
-}
+      </ul>
+      <ul className="acces_menu">
+        <li>
+          <Link to="/login">Log in</Link>
+        </li>
+        <li>
+          <Link to="/createaccount">Create Account</Link>
+        </li>
+      </ul>
+      <footer>
+        <Link to="/">
+          <img src={homeImage} alt={homeImage} style={{ width: '50px', height: '50px' }} />
+        </Link>
+      </footer>
+    </div>
+  );
+};
 
-const mapStateToProps = state => ({
-  cities: state.cities.cities, // Acceder al array de nombres de ciudades
+const mapStateToProps = (state) => ({
+  cities: state.cities.cities,
   error: state.cities.error
 });
 
-const mapDispatchToProps = {
-  fetchCities
-};
+const mapDispatchToProps = (dispatch) => ({
+  fetchCities: () => dispatch(fetchCities())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CityList);

@@ -22,9 +22,9 @@ router.get('/all', (req, res) => {
 });
 
 router.get('/city/:name/itineraries', (req, res) => {
-  const cityName = req.params.name;
+  const name = req.params.name;
 
-  cityModel.findOne({ name: cityName })
+  cityModel.findOne({ name: name })
     .then(city => {
       if (!city) {
         return res.status(404).send('Ciudad no encontrada');
@@ -54,7 +54,6 @@ router.post('/', (req, res) => {
     country: req.body.country,
     img: req.body.img
   });
-
   newCity.save()
     .then(city => {
       res.status(201).send(city);

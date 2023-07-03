@@ -1,15 +1,14 @@
 import axios from 'axios';
 
-// Action Types
 export const FETCH_CITIES_SUCCESS = 'FETCH_CITIES_SUCCESS';
 export const FETCH_CITIES_FAILURE = 'FETCH_CITIES_FAILURE';
+export const FETCH_ITINERARIES_SUCCESS = 'FETCH_ITINERARIES_SUCCESS';
+export const FETCH_ITINERARIES_FAILURE = 'FETCH_ITINERARIES_FAILURE';
 
-// Action Creators
 export const fetchCitiesSuccess = (cities) => {
-  const cityNames = cities.map(city => city.name);
   return {
     type: FETCH_CITIES_SUCCESS,
-    payload: cityNames
+    payload: cities
   };
 };
 
@@ -20,7 +19,20 @@ export const fetchCitiesFailure = (error) => {
   };
 };
 
-// Async Action Creator
+export const fetchItinerariesSuccess = (itineraries) => {
+  return {
+    type: FETCH_ITINERARIES_SUCCESS,
+    payload: itineraries
+  };
+};
+
+export const fetchItinerariesFailure = (error) => {
+  return {
+    type: FETCH_ITINERARIES_FAILURE,
+    payload: error
+  };
+};
+
 export const fetchCities = () => {
   return (dispatch) => {
     axios.get('http://localhost:3002/cities/all')
@@ -32,4 +44,30 @@ export const fetchCities = () => {
         dispatch(fetchCitiesFailure(error));
       });
   };
+};
+
+// export const fetchItineraries = () => {
+//   return (dispatch) => {
+//     axios.get('http://localhost:3002/itineraries/all')
+//       .then(response => {
+//         const itineraries = response.data;
+//         dispatch(fetchItinerariesSuccess(itineraries));
+//       })
+//       .catch(error => {
+//         dispatch(fetchItinerariesFailure(error));
+//       });
+//   };
+// };
+
+export const fetchItineraries = (cityName) => {
+return (dispatch) => {
+axios.get(`http://localhost:3002/itineraries/${cityName}/itineraries`)
+.then(response => {
+const itineraries = response.data;
+dispatch(fetchItinerariesSuccess(itineraries));
+})
+.catch(error => {
+ dispatch(fetchItinerariesFailure(error));
+});
+};
 };

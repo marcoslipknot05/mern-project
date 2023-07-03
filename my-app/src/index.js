@@ -11,9 +11,10 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import cityReducer from './store/reducers/cityReducer';
-import itineraryReducer from './store/reducers/itineraryReducer'; // Importa el nuevo reducer
+import itineraryReducer from './store/reducers/itineraryReducer';
 import Layout from './components/Layout';
-import CityList from './components/citylist';
+import CityList from './components/Citylist';
+import ItineraryList from './components/ItineraryList';
 
 // Combina los reducers
 const rootReducer = combineReducers({
@@ -26,9 +27,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
-ReactDOM.createRoot(
-  document.getElementById('root')
-).render(
+ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
@@ -37,12 +36,14 @@ ReactDOM.createRoot(
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<LogIn />} />
             <Route path="/createaccount" element={<CreateAccount />} />
+            <Route path="/cities" element={<CityList />} />
+            <Route path="/itineraries/:cityName/itineraries" element={<ItineraryList />} /> {/* Agrega esta ruta para ItineraryList */}
           </Route>
-          <Route path="/cities" element={<CityList />} />
         </Routes>
       </Router>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 reportWebVitals();

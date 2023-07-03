@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchCities } from '../store/actions/cityActions';
-import CityList from './citylist';
+import CityList from './Citylist';
 import "../utilities/landing.css";
 import startImage from "../images/start-landing-image.png";
 import { Link } from "react-router-dom";

@@ -1,39 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchItineraries } from '../store/actions/itineraryActions';
+import { useParams } from 'react-router-dom';
 
-class ItineraryList extends React.Component {
-  componentDidMount() {
-    const { cityId } = this.props;
-    this.props.fetchItineraries(cityId);
+const ItineraryList = ({ itineraries, error, fetchItineraries }) => {
+  const Params = useParams()
+  const {cityName} = Params;
+    useEffect(() => {
+    fetchItineraries(cityName);
+  }, [cityName, fetchItineraries]);
+
+  if (error) {
+    return <div>Error al cargar los itinerarios: {error.message}</div>;
   }
 
-  render() {
-    const { itineraries, error } = this.props;
-
-    if (error) {
-      return <div>Error al cargar los itinerarios: {error.message}</div>;
-    }
-
-    if (itineraries.length === 0) {
-      return <div>Cargando itinerarios...</div>;
-    }
-
-    return (
-      <div>
-        <h2>Itinerarios:</h2>
-        <ul>
-          {itineraries.map((itinerary, index) => (
-            <li key={`${itinerary.id}-${index}`}>{itinerary.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
+  if (itineraries.length === 0) {
+    return <div>Cargando itinerarios...</div>;
   }
-}
+
+  return (
+    <div>
+      <h2>Itinerarios:</h2>
+      <ul>
+        {itineraries.map((itinerary, index) => (
+          <li key={`${itinerary.id}-${index}`}>{itinerary.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 const mapStateToProps = (state, ownProps) => ({
-  itineraries: state.itineraries.itineraries[ownProps.cityId] || [], // Acceder a los itinerarios correspondientes a la ciudad
+  itineraries: state.itineraries.itineraries[ownProps.cityId] || [],
   error: state.itineraries.error
 });
 

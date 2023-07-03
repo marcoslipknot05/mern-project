@@ -20,9 +20,9 @@ export const fetchItinerariesFailure = (error) => {
 };
 
 // Async Action Creator
-export const fetchItineraries = (cityId) => {
+export const fetchItineraries = (cityName) => {
   return (dispatch) => {
-    axios.get(`http://localhost:3002/itineraries/${cityId}`)
+    axios.get(`http://localhost:3002/itineraries/${cityName}/itineraries`)
       .then(response => {
         const itineraries = response.data;
         dispatch(fetchItinerariesSuccess(itineraries));

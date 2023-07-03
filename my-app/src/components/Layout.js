@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import appLogo from "../images/MYtineraryLogo.png";
-//import CityList from "./citylist";
 import "../utilities/citylist.css";
 
 const Layout = () => {
@@ -12,7 +11,6 @@ const Layout = () => {
           <img src={appLogo} alt="Descripción de la imagen" className="logo-landing" />
         </div>
       </header>
-      {/* <CityList /> */}
       <Outlet />
     </>
   );
