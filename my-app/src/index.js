@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './index.css';
-import reportWebVitals from './reportWebVitals'; 
+import reportWebVitals from './reportWebVitals';
 import Landing from './components/Landing';
 import LogIn from "./components/LogIn";
 import CreateAccount from "./components/CreateAccount";
@@ -13,7 +13,7 @@ import thunk from 'redux-thunk';
 import cityReducer from './store/reducers/cityReducer';
 import itineraryReducer from './store/reducers/itineraryReducer';
 import Layout from './components/Layout';
-import CityList from './components/Citylist';
+import CityList from './components/CityList';
 import ItineraryList from './components/ItineraryList';
 
 // Combina los reducers

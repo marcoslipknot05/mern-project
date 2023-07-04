@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import homeImage from '../images/Home_logo.png';
 import { fetchCities } from '../store/actions/cityActions';
 
-const CityList = ({ cities, error, fetchCities }) => {
+const CityList = ({ cities, error }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,8 +56,7 @@ const mapStateToProps = (state) => ({
   error: state.cities.error
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchCities: () => dispatch(fetchCities())
+const mapDispatchToProps = () => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CityList);

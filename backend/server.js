@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const db = require('./keys').mongoURI;
+const db = require('./keys').mongoEO1;
 const db2 = require('./keys').mongoURI2;
 
 app.use(bodyParser.json());
